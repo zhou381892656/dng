@@ -1,3 +1,3 @@
 <view style="height:{{headerHeight}}px;" class="header">
-  <input placeholder="这是输入框"></input>
+  <slot name=img"></slot>
 </view>

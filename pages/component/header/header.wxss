@@ -2,3 +2,6 @@
   width:750rpx;
   background:#858585;
 }
+slot{
+  background-image: "../../images/home_actived.png"
+}
