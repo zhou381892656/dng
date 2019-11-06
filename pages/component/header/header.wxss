@@ -1,0 +1,4 @@
+.header{
+  width:750rpx;
+  background:#858585;
+}
