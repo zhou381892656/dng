@@ -1,3 +1,4 @@
 <view style="height:{{headerHeight}}px;" class="header">
-  <slot name=img"></slot>
+  <slot name="kacao"></slot>
 </view>
+<view  style="height:{{headerHeight}}px;"></view>

@@ -1,6 +1,10 @@
 .header{
   width:750rpx;
-  background:#858585;
+  /* background:#858585; */
+  position:fixed;
+  top:0;
+  left:0;
+  z-index: 9999999;
 }
 slot{
   background-image: "../../images/home_actived.png"

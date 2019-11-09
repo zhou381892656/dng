@@ -1,5 +1,13 @@
 //app.js
 App({
+
+  globalData: {
+        token: null,
+        hasRoom: null,
+        coupon_code: null,//优惠券码
+        userInfo: null,
+        host:'https://friend.dngver.com',
+  },  
   onLaunch: function () {
     wx.getSystemInfo({
       success: res => {
@@ -7,6 +15,8 @@ App({
         this.globalData.headerHeight = res.statusBarHeight + 46;
       }
     })
+
+    
 
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -17,6 +27,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+
       }
     })
     // 获取用户信息
@@ -27,6 +38,7 @@ App({
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
+              
               this.globalData.userInfo = res.userInfo
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -40,7 +52,34 @@ App({
       }
     })
   },
-  globalData: {
-    userInfo: null
-  }
+
+  wxRequest(method, url, data, token, callback, errFun) {
+    wx.request({
+      url: url,
+      method: method,
+      data: data,
+      header: {
+        'content-type': method == 'GET' ? 'application/json' : 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'token': token
+      },
+      dataType: 'json',
+      success: function (res) {
+        callback(res.data);
+      },
+      fail: function (err) {
+        errFun(res);
+      }
+    })
+  },
+  // 公共分享
+  globalShare() {
+    return {
+      title: "这是我在.DNG定格拍的照片，快来看",
+      path: "/pages/index/index",
+      imageUrl: "/pages/images/share.jpg",
+      success: function (a) { }
+    };
+  },
+ 
 })

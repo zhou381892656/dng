@@ -1,19 +1,30 @@
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
-
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+const getnowDate = function(){
+    var date = new Date()
+    var y = date.getFullYear(),
+        m = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : '0' + (date.getMonth() + 1),
+        d = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+    return m + '月' + d + '日';
 }
 
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
+const ajax = function(url,method,parmas,succ){
+    wx.request({
+        url: url, 
+        method: method,
+        data: parmas,
+        header: {
+            'content-type': 'application/json' 
+        },
+        success(res) {
+            succ(res.data)
+        }
+    });
 }
+
+
+
+
 
 module.exports = {
-  formatTime: formatTime
+    getnowDate: getnowDate,
+    ajax: ajax
 }
